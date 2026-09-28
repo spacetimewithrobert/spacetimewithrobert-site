@@ -1,0 +1,18 @@
+My Priority Order
+
+Phase 1
+Thumbnail overlay cleanup
+Popup category/index display
+Loading spinner
+
+Phase 2
+Click-to-zoom
+Mobile pinch zoom
+Drag while zoomed
+
+Phase 3
+Slideshow mode
+Random photo button
+Deep-linking photos via URL
+
+I'm considering moving the nav buttons under the image and having both mobile and desktop have the same UI layout for consistency. The next issue with the popup is the area the image is displayed seems fixed to the image size when zooming in. For example, when I see an image with smartphone resolution and aspect ratio the image display popup will constrict the viewing port of the image to that same size. Then, when I zoom in, the viewing port remains the same, making it feel like you are zooming into a window rather than the image itself. I'm not sure if that makes perfect sense but that is my best description of this issue at the moment. The last issue with zooming in is when on desktop it allows dragging after a single click, when intuitively it should be only while the user is holding down the mouse button. So right now drag is a toggle and it should not be. So the 2 main issues with zooming is the constricted viewport and the toggle-drag, and the main UI consideration is moving the nav buttons below the image for consistency, which would also allow for more room to see the image.
