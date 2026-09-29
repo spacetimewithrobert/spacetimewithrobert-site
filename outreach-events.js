@@ -6,12 +6,12 @@
 
 window.OUTREACH_EVENTS = {
 
-    "261018": {
+    "261003": {
 
         description:
             "SPACETIME!",
 
-        startTime: "19:00",
+        startTime: "18:00",
 
         endTime: "21:00",
 
