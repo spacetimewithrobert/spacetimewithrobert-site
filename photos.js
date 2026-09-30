@@ -20,13 +20,6 @@ let inspectionViewer;
 ========================= */
 
 let inspectionZoom = 1;
-let inspectionTranslateX = 0;
-let inspectionTranslateY = 0;
-
-let inspectionDragging = false;
-
-let inspectionDragStartX = 0;
-let inspectionDragStartY = 0;
 
 function parseFilename(filename) {
 
@@ -350,15 +343,6 @@ function initGallery() {
 
         document
             .getElementById(
-                "inspectionDownload"
-            )
-            .addEventListener(
-                "click",
-                downloadInspectionImage
-            );
-
-        document
-            .getElementById(
                 "photoPopupClose"
             )
             .addEventListener(
@@ -373,21 +357,6 @@ function initGallery() {
             .addEventListener(
                 "click",
                 closePopup
-            );
-
-        inspectionImage.addEventListener(
-                "mousedown",
-                startInspectionDrag
-            );
-
-        window.addEventListener(
-                "mousemove",
-                dragInspection
-            );
-
-        window.addEventListener(
-                "mouseup",
-                stopInspectionDrag
             );
             
         document.addEventListener(
@@ -682,14 +651,14 @@ function showPreviousPhoto() {
 function openInspection() {
 
     inspectionZoom = 1;
-    inspectionTranslateX = 0;
-    inspectionTranslateY = 0;
 
     inspectionImage.src =
         popupImage.src;
 
     inspectionImage.alt =
         popupImage.alt;
+
+    inspectionImage.classList.add("loaded");
 
     updateInspectionTransform();
 
@@ -716,13 +685,7 @@ function closeInspection() {
 function updateInspectionTransform() {
 
     inspectionImage.style.transform =
-        `
-        translate(
-            ${inspectionTranslateX}px,
-            ${inspectionTranslateY}px
-        )
-        scale(${inspectionZoom})
-        `;
+        `scale(${inspectionZoom})`;
 
 }
 
@@ -748,13 +711,6 @@ function zoomInspectionOut() {
             1
         );
 
-    if (inspectionZoom === 1) {
-
-        inspectionTranslateX = 0;
-        inspectionTranslateY = 0;
-
-    }
-
     updateInspectionTransform();
 
 }
@@ -764,85 +720,7 @@ function resetInspection() {
 
     inspectionZoom = 1;
 
-    inspectionTranslateX = 0;
-    inspectionTranslateY = 0;
-
-    inspectionDragging = false;
-
     updateInspectionTransform();
-
-}
-
-
-function startInspectionDrag(event) {
-
-    if (
-        inspectionZoom <= 1
-    ) return;
-
-    inspectionDragging = true;
-
-    inspectionDragStartX =
-        event.clientX -
-        inspectionTranslateX;
-
-    inspectionDragStartY =
-        event.clientY -
-        inspectionTranslateY;
-
-    inspectionImage.classList.add(
-        "dragging"
-    );
-
-}
-
-
-function dragInspection(event) {
-
-    if (
-        !inspectionDragging
-    ) return;
-
-    inspectionTranslateX =
-        event.clientX -
-        inspectionDragStartX;
-
-    inspectionTranslateY =
-        event.clientY -
-        inspectionDragStartY;
-
-    updateInspectionTransform();
-
-}
-
-
-function stopInspectionDrag() {
-
-    inspectionDragging = false;
-
-    inspectionImage.classList.remove(
-        "dragging"
-    );
-
-}
-
-
-function downloadInspectionImage() {
-
-    const link =
-        document.createElement("a");
-
-    link.href =
-        popupImage.src;
-
-    link.download =
-        popupImage.alt || "space-time-photo";
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    link.remove();
 
 }
 
