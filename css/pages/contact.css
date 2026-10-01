@@ -172,7 +172,7 @@ body.status-nogo .contact-page .glass-panel {
 
     align-items: center;
 
-    gap: 10px;
+    gap: 8px;
 }
 
 .contact-label {
@@ -185,29 +185,29 @@ body.status-nogo .contact-page .glass-panel {
 }
 
 /* =========================
-   BUTTON
+   EMAIL LINK
 ========================= */
 
-.contact-button {
+.contact-email {
 
     display: inline-block;
 
     padding:
-        10px 16px;
+        8px 12px;
 
-    border-radius: 8px;
-
-    text-decoration: none;
+    border-radius: 6px;
 
     border:
         1px solid var(--border);
 
     background:
-        rgba(255,255,255,0.04);
+        rgba(255,255,255,0.03);
 
     color: #eaf7f7;
 
-    font-weight: bold;
+    font-size: 14px;
+
+    text-decoration: none;
 
     transition:
         all .25s ease;
@@ -215,7 +215,7 @@ body.status-nogo .contact-page .glass-panel {
 
 /* GO */
 
-body.status-go .contact-button {
+body.status-go .contact-email {
 
     border-color:
         rgba(46,203,99,0.55);
@@ -223,22 +223,22 @@ body.status-go .contact-button {
 
 /* NO GO */
 
-body.status-nogo .contact-button {
+body.status-nogo .contact-email {
 
     border-color:
         rgba(209,74,74,0.55);
 }
 
-.contact-button:hover {
+.contact-email:hover {
 
     border-color: var(--accent);
 
     box-shadow:
         0 0 14px var(--glow);
 
-    transform:
-        translateY(-1px);
+    color: var(--accent);
 }
+
 
 /* =========================
    RESPONSE TEXT
