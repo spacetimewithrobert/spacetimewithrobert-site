@@ -9,7 +9,7 @@ function getCurrentPage() {
 const CURRENT_PAGE = getCurrentPage();
 
 function isEventsPage() {
-    return CURRENT_PAGE === "events.html";
+    return CURRENT_PAGE === "index.html" || window.location.pathname === "/";
 }
 
 function applyHeaderMode() {
@@ -155,7 +155,7 @@ const HEADER_HTML = `
 
     <nav class="site-nav">
         <a href="about.html">ABOUT</a>
-        <a href="events.html">EVENTS</a>
+        <a href="/">EVENTS</a>
         <a href="photos.html">PHOTOS</a>
         <a href="contact.html">CONTACT</a>
     </nav>
@@ -197,17 +197,28 @@ function injectHeader() {
 
 function setActiveNav() {
 
+    const path =
+        window.location.pathname;
+
     const currentPage =
-        window.location.pathname.split("/").pop();
+        path === "/" || path === ""
+            ? "index.html"
+            : path.split("/").pop();
 
     const navLinks =
         document.querySelectorAll(".site-nav a");
 
     navLinks.forEach(link => {
 
-        const href = link.getAttribute("href");
+        const href =
+            link.getAttribute("href");
 
-        if (href === currentPage) {
+        const normalizedHref =
+            href === "/"
+                ? "index.html"
+                : href;
+
+        if (normalizedHref === currentPage) {
             link.classList.add("active");
         }
         else {

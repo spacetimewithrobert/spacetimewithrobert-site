@@ -155,26 +155,12 @@ function updateCategoryTabs() {
 
     });
 
-    const totalPhotos =
-        GALLERY_PHOTOS.length;
-
     document
         .querySelectorAll(".photo-tab")
         .forEach(tab => {
 
             const category =
                 tab.dataset.category;
-
-            if (
-                category === "all"
-            ) {
-
-                tab.textContent =
-                    `All (${totalPhotos})`;
-
-                return;
-
-            }
 
             const count =
                 counts[category] || 0;
@@ -216,7 +202,7 @@ function initGallery() {
     
     updateCategoryTabs();
 
-    renderPhotos("all");
+    renderPhotos("outreach");
 
     document
         .querySelectorAll(".photo-tab")
@@ -435,12 +421,10 @@ function renderPhotos(category) {
     grid.innerHTML = "";
 
     currentPhotos =
-    category === "all"
-        ? GALLERY_PHOTOS
-        : GALLERY_PHOTOS.filter(
-            photo =>
-                photo.category === category
-        );
+    GALLERY_PHOTOS.filter(
+        photo =>
+            photo.category === category
+    );
 
     currentPhotos.forEach(photo => {
 
