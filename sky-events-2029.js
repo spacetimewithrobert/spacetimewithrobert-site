@@ -4,7 +4,7 @@
 // Astronomy Event Database System
 // ========================================
 
-const SKY_EVENTS_2029 = {
+window.SKY_EVENTS_2029 = {
 
     // ========================================
     // JANUARY

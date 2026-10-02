@@ -24,11 +24,11 @@ function getPrimarySkyEvent(events = []) {
 
 const SKY_EVENTS = {
 
-    ...SKY_EVENTS_2026,
-    ...SKY_EVENTS_2027,
-    ...SKY_EVENTS_2028,
-    ...SKY_EVENTS_2029,
-    ...SKY_EVENTS_2030,
-    ...SKY_EVENTS_2031
+    ...(window.SKY_EVENTS_2026 || {}),
+    ...(window.SKY_EVENTS_2027 || {}),
+    ...(window.SKY_EVENTS_2028 || {}),
+    ...(window.SKY_EVENTS_2029 || {}),
+    ...(window.SKY_EVENTS_2030 || {}),
+    ...(window.SKY_EVENTS_2031 || {})
 
 };
