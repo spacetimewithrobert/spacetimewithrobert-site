@@ -538,15 +538,15 @@
     }
 
 
-    /* Sky event — bottom right */
+    /* Sky event — bottom left */
 
     .sky-event {
 
         bottom: 4px;
-        right: 4px;
-        left: auto;
+        left: 4px;
+        right: auto;
 
-        font-size: 14px;
+        font-size: 10px;
 
         z-index: 3;
     }

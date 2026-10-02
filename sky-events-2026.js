@@ -5,177 +5,26 @@
 // ========================================
 // ========================================
 // SKY EVENT DATABASE
+// Upcoming events only
 // Date format:
 // YYMMDD
 // Example:
-// 260812 = August 12, 2026
+// 261021 = October 21, 2026
 // ========================================
 
 window.SKY_EVENTS_2026 = {
 
     // ========================================
-    // JANUARY
+    // OCTOBER
     // ========================================
 
-    "260103": [
-
-        {
-            icon: "☄️",
-            title: "Quadrantids Meteor Shower Peak",
-            type: "meteor-shower",
-            importance: 4,
-            visibility: "Best before dawn",
-            moonImpact: "Low",
-            outreachFriendly: true
-        }
-
-    ],
-
-
-
-    // ========================================
-    // MARCH
-    // ========================================
-
-    "260314": [
-
-        {
-            icon: "🌕",
-            title: "Total Lunar Eclipse",
-            type: "lunar-eclipse",
-            importance: 5,
-            visibility: "Visible throughout eclipse",
-            moonImpact: "N/A",
-            outreachFriendly: true
-        }
-
-    ],
-
-
-
-    "260320": [
-
-        {
-            icon: "🌞",
-            title: "March Equinox",
-            type: "equinox",
-            importance: 3,
-            visibility: "All day",
-            moonImpact: "N/A",
-            outreachFriendly: false
-        }
-
-    ],
-
-
-
-    // ========================================
-    // APRIL
-    // ========================================
-
-    "260422": [
-
-        {
-            icon: "☄️",
-            title: "Lyrids Meteor Shower Peak",
-            type: "meteor-shower",
-            importance: 3,
-            visibility: "Best after midnight",
-            moonImpact: "Moderate",
-            outreachFriendly: true
-        }
-
-    ],
-
-
-
-    // ========================================
-    // MAY
-    // ========================================
-
-    "260506": [
-
-        {
-            icon: "☄️",
-            title: "Eta Aquariids Meteor Shower Peak",
-            type: "meteor-shower",
-            importance: 3,
-            visibility: "Best before dawn",
-            moonImpact: "Low",
-            outreachFriendly: true
-        }
-
-    ],
-
-
-
-    // ========================================
-    // JUNE
-    // ========================================
-
-    "260621": [
-
-        {
-            icon: "🌞",
-            title: "June Solstice",
-            type: "solstice",
-            importance: 3,
-            visibility: "All day",
-            moonImpact: "N/A",
-            outreachFriendly: false
-        }
-
-    ],
-
-
-
-    // ========================================
-    // JULY
-    // ========================================
-
-    "260730": [
-
-        {
-            icon: "☄️",
-            title: "Delta Aquariids Meteor Shower Peak",
-            type: "meteor-shower",
-            importance: 3,
-            visibility: "Best after midnight",
-            moonImpact: "Moderate",
-            outreachFriendly: true
-        }
-
-    ],
-
-
-
-    // ========================================
-    // AUGUST
-    // ========================================
-
-    "260812": [
-
-        {
-            icon: "☄️",
-            title: "Perseid Meteor Shower Peak",
-            type: "meteor-shower",
-            importance: 5,
-            visibility: "Best after midnight",
-            moonImpact: "Moderate",
-            outreachFriendly: true
-        }
-
-    ],
-
-
-
-    "260814": [
+    "261004": [
 
         {
             icon: "🪐",
             title: "Saturn at Opposition",
             type: "planet-opposition",
-            importance: 4,
+            importance: 5,
             visibility: "Visible all night",
             moonImpact: "Low",
             outreachFriendly: true
@@ -184,46 +33,20 @@ window.SKY_EVENTS_2026 = {
     ],
 
 
-
-    // ========================================
-    // SEPTEMBER
-    // ========================================
-
-    "260907": [
+    "261006": [
 
         {
             icon: "🌕",
-            title: "Total Lunar Eclipse",
-            type: "lunar-eclipse",
-            importance: 5,
-            visibility: "Visible throughout eclipse",
+            title: "Moon–Jupiter Occultation",
+            type: "lunar-occultation",
+            importance: 4,
+            visibility: "Occultation visible from parts of North America",
             moonImpact: "N/A",
             outreachFriendly: true
         }
 
     ],
 
-
-
-    "260922": [
-
-        {
-            icon: "🌞",
-            title: "September Equinox",
-            type: "equinox",
-            importance: 3,
-            visibility: "All day",
-            moonImpact: "N/A",
-            outreachFriendly: false
-        }
-
-    ],
-
-
-
-    // ========================================
-    // OCTOBER
-    // ========================================
 
     "261021": [
 
@@ -233,35 +56,18 @@ window.SKY_EVENTS_2026 = {
             type: "meteor-shower",
             importance: 3,
             visibility: "Best before dawn",
-            moonImpact: "Low",
+            moonImpact: "High",
             outreachFriendly: true
         }
 
     ],
-
 
 
     // ========================================
     // NOVEMBER
     // ========================================
 
-    "261105": [
-
-        {
-            icon: "🪐",
-            title: "Jupiter at Opposition",
-            type: "planet-opposition",
-            importance: 5,
-            visibility: "Visible all night",
-            moonImpact: "Low",
-            outreachFriendly: true
-        }
-
-    ],
-
-
-
-    "261117": [
+    "261116": [
 
         {
             icon: "☄️",
@@ -275,6 +81,20 @@ window.SKY_EVENTS_2026 = {
 
     ],
 
+
+    "261125": [
+
+        {
+            icon: "🪐",
+            title: "Uranus at Opposition",
+            type: "planet-opposition",
+            importance: 3,
+            visibility: "Visible all night with binoculars or a telescope",
+            moonImpact: "Low",
+            outreachFriendly: true
+        }
+
+    ],
 
 
     // ========================================
@@ -296,7 +116,6 @@ window.SKY_EVENTS_2026 = {
     ],
 
 
-
     "261221": [
 
         {
@@ -312,7 +131,6 @@ window.SKY_EVENTS_2026 = {
     ],
 
 
-
     "261222": [
 
         {
@@ -321,14 +139,13 @@ window.SKY_EVENTS_2026 = {
             type: "meteor-shower",
             importance: 2,
             visibility: "Best before dawn",
-            moonImpact: "Moderate",
+            moonImpact: "High",
             outreachFriendly: true
         }
 
     ]
 
 };
-
 
 
 // ========================================
@@ -342,13 +159,11 @@ function getSkyEvents(dateKey) {
 }
 
 
-
 function hasSkyEvents(dateKey) {
 
     return getSkyEvents(dateKey).length > 0;
 
 }
-
 
 
 function getPrimarySkyEventForDate(dateKey) {
