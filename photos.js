@@ -15,12 +15,6 @@ let inspectionMode;
 let inspectionImage;
 let inspectionViewer;
 
-/* =========================
-   INSPECTION MODE
-========================= */
-
-let inspectionZoom = 1;
-
 function parseFilename(filename) {
 
     const clean =
@@ -258,6 +252,123 @@ function initGallery() {
             document.getElementById(
                 "inspectionViewer"
             );
+
+        /* =========================
+           INSPECTION DRAGGING
+        ========================= */
+
+        inspectionViewer.addEventListener(
+            "pointerdown",
+            event => {
+
+                if (inspectionZoom <= 1) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                inspectionDragging = true;
+
+                inspectionDragStartX =
+                    event.clientX;
+
+                inspectionDragStartY =
+                    event.clientY;
+
+                inspectionStartX =
+                    inspectionX;
+
+                inspectionStartY =
+                    inspectionY;
+
+                inspectionViewer.setPointerCapture(
+                    event.pointerId
+                );
+
+                inspectionImage.classList.add(
+                    "dragging"
+                );
+
+            }
+        );
+
+
+        inspectionViewer.addEventListener(
+            "pointermove",
+            event => {
+
+                if (!inspectionDragging) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                inspectionX =
+                    inspectionStartX +
+                    (
+                        event.clientX -
+                        inspectionDragStartX
+                    );
+
+                inspectionY =
+                    inspectionStartY +
+                    (
+                        event.clientY -
+                        inspectionDragStartY
+                    );
+
+                updateInspectionTransform();
+
+            }
+        );
+
+
+        inspectionViewer.addEventListener(
+            "pointerup",
+            event => {
+
+                if (!inspectionDragging) {
+                    return;
+                }
+
+                inspectionDragging = false;
+
+                inspectionImage.classList.remove(
+                    "dragging"
+                );
+
+                try {
+
+                    inspectionViewer.releasePointerCapture(
+                        event.pointerId
+                    );
+
+                } catch (error) {}
+
+            }
+        );
+
+
+        inspectionViewer.addEventListener(
+            "pointercancel",
+            event => {
+
+                inspectionDragging = false;
+
+                inspectionImage.classList.remove(
+                    "dragging"
+                );
+
+                try {
+
+                    inspectionViewer.releasePointerCapture(
+                        event.pointerId
+                    );
+
+                } catch (error) {}
+
+            }
+        );
 
         popupMeta =
             document.getElementById(
@@ -632,27 +743,53 @@ function showPreviousPhoto() {
    INSPECTION MODE
 ========================= */
 
+let inspectionZoom = 1;
+let inspectionX = 0;
+let inspectionY = 0;
+
+let inspectionBaseWidth = 0;
+let inspectionBaseHeight = 0;
+
+let inspectionDragging = false;
+let inspectionDragStartX = 0;
+let inspectionDragStartY = 0;
+let inspectionStartX = 0;
+let inspectionStartY = 0;
+
+
+/* =========================
+   OPEN INSPECTION
+========================= */
+
 function openInspection() {
 
     inspectionZoom = 1;
+    inspectionX = 0;
+    inspectionY = 0;
 
-    inspectionImage.src =
-        popupImage.src;
-
-    inspectionImage.alt =
-        popupImage.alt;
-
+    inspectionImage.src = popupImage.src;
+    inspectionImage.alt = popupImage.alt;
     inspectionImage.classList.add("loaded");
-
-    updateInspectionTransform();
 
     browseMode.classList.remove("active");
     inspectionMode.classList.add("active");
 
     popup.classList.add("inspection-open");
 
+    /*
+       Wait until the inspection viewer is visible
+       before calculating the image's fitted size.
+    */
+    requestAnimationFrame(() => {
+        fitInspectionImage();
+    });
+
 }
 
+
+/* =========================
+   CLOSE INSPECTION
+========================= */
 
 function closeInspection() {
 
@@ -666,13 +803,136 @@ function closeInspection() {
 }
 
 
-function updateInspectionTransform() {
+/* =========================
+   FIT IMAGE TO VIEWER
+========================= */
 
-    inspectionImage.style.transform =
-        `scale(${inspectionZoom})`;
+function fitInspectionImage() {
+
+    if (!inspectionImage.naturalWidth ||
+        !inspectionImage.naturalHeight) {
+        return;
+    }
+
+    const viewerWidth =
+        inspectionViewer.clientWidth;
+
+    const viewerHeight =
+        inspectionViewer.clientHeight;
+
+    if (!viewerWidth || !viewerHeight) {
+        return;
+    }
+
+    const imageRatio =
+        inspectionImage.naturalWidth /
+        inspectionImage.naturalHeight;
+
+    const viewerRatio =
+        viewerWidth /
+        viewerHeight;
+
+    if (imageRatio > viewerRatio) {
+
+        inspectionBaseWidth =
+            viewerWidth;
+
+        inspectionBaseHeight =
+            viewerWidth / imageRatio;
+
+    } else {
+
+        inspectionBaseHeight =
+            viewerHeight;
+
+        inspectionBaseWidth =
+            viewerHeight * imageRatio;
+
+    }
+
+    /*
+       The image is positioned from its center.
+       This keeps the initial view perfectly centered.
+    */
+    inspectionImage.style.width =
+        `${inspectionBaseWidth}px`;
+
+    inspectionImage.style.height =
+        `${inspectionBaseHeight}px`;
+
+    inspectionX = 0;
+    inspectionY = 0;
+
+    updateInspectionTransform();
 
 }
 
+
+/* =========================
+   UPDATE IMAGE POSITION
+========================= */
+
+function updateInspectionTransform() {
+
+    if (!inspectionBaseWidth ||
+        !inspectionBaseHeight) {
+        return;
+    }
+
+    const viewerWidth =
+        inspectionViewer.clientWidth;
+
+    const viewerHeight =
+        inspectionViewer.clientHeight;
+
+    const scaledWidth =
+        inspectionBaseWidth *
+        inspectionZoom;
+
+    const scaledHeight =
+        inspectionBaseHeight *
+        inspectionZoom;
+
+    /*
+       Maximum distance the image can move from center.
+       When the image is larger than the viewport,
+       this allows the user to reach every part of it.
+    */
+    const maxX =
+        Math.max(
+            0,
+            (scaledWidth - viewerWidth) / 2
+        );
+
+    const maxY =
+        Math.max(
+            0,
+            (scaledHeight - viewerHeight) / 2
+        );
+
+    inspectionX =
+        Math.max(
+            -maxX,
+            Math.min(maxX, inspectionX)
+        );
+
+    inspectionY =
+        Math.max(
+            -maxY,
+            Math.min(maxY, inspectionY)
+        );
+
+    inspectionImage.style.transform =
+        `translate(-50%, -50%)
+         translate(${inspectionX}px, ${inspectionY}px)
+         scale(${inspectionZoom})`;
+
+}
+
+
+/* =========================
+   ZOOM IN
+========================= */
 
 function zoomInspectionIn() {
 
@@ -687,6 +947,10 @@ function zoomInspectionIn() {
 }
 
 
+/* =========================
+   ZOOM OUT
+========================= */
+
 function zoomInspectionOut() {
 
     inspectionZoom =
@@ -700,13 +964,37 @@ function zoomInspectionOut() {
 }
 
 
+/* =========================
+   RESET
+========================= */
+
 function resetInspection() {
 
     inspectionZoom = 1;
+    inspectionX = 0;
+    inspectionY = 0;
 
     updateInspectionTransform();
 
 }
+
+/* =========================
+   WINDOW RESIZE
+========================= */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        if (
+            inspectionMode &&
+            inspectionMode.classList.contains("active")
+        ) {
+            fitInspectionImage();
+        }
+
+    }
+);
 
 function closePopup() {
 

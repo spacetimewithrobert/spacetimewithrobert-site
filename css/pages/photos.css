@@ -834,10 +834,6 @@ body.popup-open {
 }
 
 
-/* ========================================
-   INSPECTION VIEWER
-======================================== */
-
 .inspection-viewer {
     position: relative;
 
@@ -847,15 +843,28 @@ body.popup-open {
 
     min-height: 0;
 
-    overflow: auto;
+    overflow: hidden;
 
-    display: block;
+    display: flex;
 
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    touch-action: none;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    cursor: grab;
 }
 
 
 .inspection-viewer img {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
     display: block;
 
     width: auto;
@@ -866,13 +875,15 @@ body.popup-open {
 
     object-fit: contain;
 
-    transform-origin: top left;
+    transform-origin: center center;
 
     user-select: none;
 
     -webkit-user-drag: none;
 
     opacity: 1;
+
+    pointer-events: auto;
 }
 
 
@@ -910,7 +921,9 @@ body.popup-open {
 
 
 #inspectionReset {
-    min-width: 70px;
+    min-width: 44px;
+    width: 44px;
+    padding: 8px;
 }
 
 
