@@ -25,6 +25,6 @@ window.OUTREACH_EVENTS = {
         // 1 = GO
         // 2 = NO GO
 
-        status: 0
+        status: 1
     }
 };

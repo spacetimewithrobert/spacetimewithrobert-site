@@ -297,7 +297,7 @@ function applyStaticHeaderText() {
 
     if (arcText) {
 
-        arcText.textContent = "As of May 2026";
+        arcText.textContent = "As of October 2026";
 
         arcText.classList.remove("fade-ready");
 
