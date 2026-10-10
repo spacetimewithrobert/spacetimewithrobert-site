@@ -11,7 +11,7 @@ window.OUTREACH_EVENTS = {
         description:
             "SPACETIME!",
 
-        startTime: "18:00",
+        startTime: "17:00",
 
         endTime: "21:00",
 
@@ -25,6 +25,6 @@ window.OUTREACH_EVENTS = {
         // 1 = GO
         // 2 = NO GO
 
-        status: 0
+        status: 1
     }
 };
