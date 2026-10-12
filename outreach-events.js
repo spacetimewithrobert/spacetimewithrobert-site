@@ -6,7 +6,7 @@
 
 window.OUTREACH_EVENTS = {
 
-    "261011": {
+    "261118": {
 
         description:
             "SPACETIME!",
@@ -25,6 +25,6 @@ window.OUTREACH_EVENTS = {
         // 1 = GO
         // 2 = NO GO
 
-        status: 1
+        status: 0
     }
 };
